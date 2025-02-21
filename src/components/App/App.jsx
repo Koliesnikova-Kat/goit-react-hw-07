@@ -5,11 +5,18 @@ import s from './App.module.css';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchContacts } from '../../redux/contactsOps';
 import { useEffect } from 'react';
+import {
+  selectContacts,
+  selectError,
+  selectLoading,
+} from '../../redux/contactsSlice';
 
 export default function App() {
   const dispatch = useDispatch();
 
-  const { items, isLoading, error } = useSelector((state) => state.contacts);
+  const items = useSelector(selectContacts);
+  const isLoading = useSelector(selectLoading);
+  const error = useSelector(selectError);
 
   useEffect(() => {
     dispatch(fetchContacts());
